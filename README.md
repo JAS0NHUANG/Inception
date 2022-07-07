@@ -33,10 +33,17 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 
 ## docker-compose
 
-
 - build section in .yml file
 	https://docs.docker.com/compose/compose-file/build/
 	options:
 		- context
 		- args
 		- labels
+
+## MySQL
+
+## PHP
+
+## Nginx
+
+## Wordpress
