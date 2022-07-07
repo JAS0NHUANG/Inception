@@ -1,0 +1,10 @@
+# the docker compose file version (not docker compose or docker version...)
+version: '3.8'
+
+# Services
+services:
+
+    # mariadb
+    mariadb:
+        build:
+            context: ./requirements/mariadb

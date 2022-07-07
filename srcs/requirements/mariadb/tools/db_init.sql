@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS wordpress
+  DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE USER IF NOT EXISTS 'wordpress_user' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON wordpress.*
+  TO 'wordpress_user'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+
+CREATE DATABASE IF NOT EXISTS phpmyadmin
+  DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+CREATE USER IF NOT EXISTS 'inception_user' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.*
+  TO 'inception_user'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;

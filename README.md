@@ -26,10 +26,20 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 ## docker commands
 `docker build` : build a docker image
 	- `docker build .`
-	- `docker build -f "path to dockerfile"`
-	- 
+	- `docker build -f [path to dockerfile]`
+	- `docker build -t [TAGNAME] -f [path to Dockerfile] .`
 
 `docker images` : check built images
+
+`docker exec` : execute a program inside a container
+	- `docker exec -it [name of container] [program to exec]`
+
+`docker run` : run the container
+	- docker run -d --name [name] -e AUTOINDEX=[off/on] -p [port:port] -p [port:port] [container name]`
+
+`docker rm` : remove an image or container
+	- `docker rmi -f [image name]`
+	- `docker rm -f [container name]`
 
 ## docker-compose
 
@@ -47,3 +57,5 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 ## Nginx
 
 ## Wordpress
+
+
