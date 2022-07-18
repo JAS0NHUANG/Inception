@@ -1,0 +1,7 @@
+docker-compose up	// use docker-compose.yml
+docker-compose up --build // force build images before starting containers
+
+docker-compose -f [filename.yml] // use custom yml files
+
+
+

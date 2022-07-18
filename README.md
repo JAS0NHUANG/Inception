@@ -2,6 +2,14 @@
 
 Container + Container + Container
 
+## Steps:
+
+- 1. Create the mariadb D ockerfile.
+	Learn about the Dockerfile and docker commands
+- 2. Create the docker-compose.yml file
+	Test with some docker compose commands
+- 3. 
+
 ## dockerfile
 
 1. `FROM` - Chose a base image
@@ -49,6 +57,10 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 		- context
 		- args
 		- labels
+
+- docker compose commands:
+	- `docker-compose -f [yml file] up -d --build`
+
 
 ## MySQL
 
