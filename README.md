@@ -1,4 +1,4 @@
-# Inception
+#Inception
 
 Container + Container + Container
 
@@ -51,6 +51,10 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 		- labels
 
 ## MySQL
+
+### SQL queries
+`SHOW DATABASES;`
+`SHOW TABLES;`
 
 ## PHP
 
