@@ -4,11 +4,11 @@ Container + Container + Container
 
 ## Steps:
 
-1. Create the mariadb Dockerfile.
-	Learn about the Dockerfile and docker commands
-2. Create the docker-compose.yml file
+1. Create the mariadb Dockerfile.  
+	Learn about the [Dockerfile](#dockerfile) and [docker commands](#docker commands)
+2. Create the docker-compose.yml file  
 	Test with some docker compose commands (with only mariadb container)
-3. Write a Makefile 
+3. Write a Makefile   
 
 ## dockerfile
 
