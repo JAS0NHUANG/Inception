@@ -5,9 +5,9 @@ Container + Container + Container
 ## Steps:
 
 1. Create the mariadb Dockerfile.  
-	Learn about the [Dockerfile](#dockerfile) and [docker commands](#docker commands)
-2. Create the docker-compose.yml file  
-	Test with some docker compose commands (with only mariadb container)
+	Learn about the [Dockerfile](#dockerfile) and [docker commands](#docker-commands)
+2. Docker compose  
+	Create the [docker-compose.yml](#The-YAML-file) file and test with some [docker compose commands](#docker-compose-commands) (with only mariadb container)
 3. Write a Makefile   
 
 ## dockerfile
@@ -61,6 +61,8 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 
 ## docker-compose
 
+### the YAML file
+
 - build section in .yml file
 	https://docs.docker.com/compose/compose-file/build/
 	options:
@@ -68,7 +70,7 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 		- args
 		- labels
 
-- docker compose commands:
+### docker compose commands
 	- `docker-compose -f [yml file] up -d --build`
 
 
