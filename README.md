@@ -4,11 +4,11 @@ Container + Container + Container
 
 ## Steps:
 
-- 1. Create the mariadb Dockerfile.
-	Learn about the Dockerfile and docker commands
-- 2. Create the docker-compose.yml file
-	Test with some docker compose commands (with only mariadb container)
-- 3.  
+	1. Create the mariadb Dockerfile.
+		Learn about the Dockerfile and docker commands
+	2. Create the docker-compose.yml file
+		Test with some docker compose commands (with only mariadb container)
+	3. Write a Makefile 
 
 ## dockerfile
 
@@ -20,6 +20,14 @@ FROM alpine:3.16 // latest at 05/07/2022
 
 2. `LABEL` - give it a lable (optional)
 - key=value pair
+- The OCI:
+	[Open Container Initiative](opencontainers.org)
+	OCI Image Format Specification
+	[Annotations](https://github.com/opencontainers/image-spec/blob/main/annotations.md)
+	Some often used labels:
+		- org.opencontainers.image.authors
+		- org.opencontainers.image.source
+		- org.opencontainers.image.version
 
 3. `WORKDIR` - the working dir in the container
 
@@ -29,6 +37,8 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 5. `EXPOSE` - expose the port
 
 6. `CMD` - the command to exec in the container
+
+
 
 
 ## docker commands
