@@ -10,6 +10,12 @@ MariaDB + WP/PHP + Nginx
 2. Docker compose  
 	Create the [docker-compose.yml](#The-YAML-file) file and test with some [docker compose commands](#docker-compose-commands) (with only mariadb container)
 3. Write a Makefile   
+	Put docker-compose commands inside. It's sort-of a cheat sheet. [Docker Compose Cheat Sheet](https://cheatography.com/gauravpandey44/cheat-sheets/docker-compose/)  
+
+~~ Now we can sart a simple docker-compose app with the makefile.
+
+4. 
+
 
 ## dockerfile
 
@@ -86,6 +92,9 @@ rm : remove an image or container
 
 ### docker compose commands
 	- `docker-compose -f [yml file] up -d --build`
+
+	[Docker Compose Cheat Sheet](https://cheatography.com/gauravpandey44/cheat-sheets/docker-compose/)
+	What we do in the makefile is more-or-less copy the conent of the cheat sheet into it.
 
 
 ## MySQL
