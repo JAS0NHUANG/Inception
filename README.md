@@ -1,6 +1,7 @@
 # Inception
 
-Container + Container + Container
+Container + Container + Container  
+MariaDB + WP/PHP + Nginx
 
 ## Steps:
 
@@ -38,26 +39,39 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 
 6. `CMD` - the command to exec in the container
 
+## Docker
 
+### docker commands
 
-
-## docker commands
-`docker build` : build a docker image
+#### modification
+build : build a docker image  
 	- `docker build .`
 	- `docker build -f [path to dockerfile]`
 	- `docker build -t [TAGNAME] -f [path to Dockerfile] .`
 
-`docker images` : check built images
+create : create a "container" from an image  
+	- `docker create [image name]`
 
-`docker exec` : execute a program inside a container
+start : start a container  
+	- `docker start [container id]`
+
+run : create a container from the image and run it(short hand for create + start)  
+	- `docker run -d --name [name] -e AUTOINDEX=[off/on] -p [port:port] -p [port:port] [image name]`
+
+exec : execute a program inside a container  
 	- `docker exec -it [name of container] [program to exec]`
 
-`docker run` : run the container
-	- docker run -d --name [name] -e AUTOINDEX=[off/on] -p [port:port] -p [port:port] [container name]`
-
-`docker rm` : remove an image or container
+rm : remove an image or container  
 	- `docker rmi -f [image name]`
 	- `docker rm -f [container name]`
+
+#### inspection
+
+`docker images` : check built images
+
+`docker ps` : check running containers
+
+
 
 ## docker-compose
 
