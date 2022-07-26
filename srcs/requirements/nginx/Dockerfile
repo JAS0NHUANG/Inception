@@ -3,7 +3,10 @@ FROM debian:buster
 
 # Running commands
 # Install nginx and openssl
-RUN apt-get update && apt-get -y install nginx openssl
+RUN apt-get update && \
+	apt-get -y install \
+		nginx \
+		openssl
 
 # Self sign a SSL certification
 RUN mkdir /etc/nginx/ssl \

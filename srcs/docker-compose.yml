@@ -6,12 +6,12 @@ services:
 
     # services' names can be anything :D
     # mariadb
-    inception_mariadb:
+    mariadb:
         build:
             context: ./requirements/mariadb
 
     # nginx
-    inception_nginx:
+    nginx:
         build:
             context: ./requirements/nginx
         ports:
