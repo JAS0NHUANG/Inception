@@ -1,6 +1,8 @@
 NAME = Inception
 
 $(NAME):
+			mkdir -p /goinfre/jahuang/data/db_data
+			mkdir -p /goinfre/jahuang/data/wp_data
 			docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 all:  $(NAME)

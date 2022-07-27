@@ -16,7 +16,6 @@ MariaDB + WP/PHP + Nginx
 
 4. 
 
-
 ## dockerfile
 
 1. `FROM` - Chose a base image
@@ -96,6 +95,12 @@ rm : remove an image or container
 	[Docker Compose Cheat Sheet](https://cheatography.com/gauravpandey44/cheat-sheets/docker-compose/)
 	What we do in the makefile is more-or-less copy the conent of the cheat sheet into it.
 
+### about ".env"
+
+[Docker - environment variables](https://docs.docker.com/compose/environment-variables/)
+> You can set default values for environment variables using a .env file, which Compose automatically looks for in project directory (parent folder of your Compose file). Values set in the shell environment override those set in the .env file.
+
+Add key=value pairs in the ".env" file. And can be used as ${key} in the docker-compose.yml file.
 
 ## MySQL
 

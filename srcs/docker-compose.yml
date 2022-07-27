@@ -5,18 +5,43 @@ version: '3.8'
 services:
 
     # services' names can be anything :D
-    # mariadb
     mariadb:
         build:
             context: ./requirements/mariadb
+        volumes:
+            - db_data:/var/lib/mysql
+        restart: always
 
-    # nginx
     nginx:
         build:
             context: ./requirements/nginx
         ports:
             - 4343:443
+        restart: always
+
+    wordpress:
+        build:
+            context: ./requirements/wordpress
+        ports:
+            - 9000:9000
+        depends_on:
+            - mariadb
+        restart: always
 
 networks:
     inception:
         driver: bridge
+
+volumes:
+    db_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /goinfre/jahuang/data/db_data
+    wp_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: /goinfre/jahuang/data/wordpress
