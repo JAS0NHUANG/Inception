@@ -1,33 +1,23 @@
-NAME = Inception
+YML	=	srcs/docker-compose.yml
 
-$(NAME):
-			mkdir -p /goinfre/jahuang/data/db_data
-			mkdir -p /goinfre/jahuang/data/wp_data
-			docker-compose -f ./srcs/docker-compose.yml up -d --build
-
-all:  $(NAME)
-
-# **************************************************************************** #
-#  Manipulations                                                          #
-# **************************************************************************** #
-
-build:
-			docker-compose build
+all: 
+	mkdir -p /home/jahuang/data/wordpress
+	mkdir -p /home/jahuang/data/mariadb
+	docker compose -f $(YML) up -d --build
 
 up:
-			docker-compose -f ./srcs/docker-compose.yml up -d --build
+	docker compose -f $(YML) up
 
 down:
-			docker-compose -f ./srcs/docker-compose.yml down --rmi all
+	docker compose -f $(YML) down
 
-fclean:		down
-			docker rmi -f $$(docker images -aq)
+re: fclean all
 
-# **************************************************************************** #
-#  Inspections                                                            #
-# **************************************************************************** #
-list:
-			docker-compose -f ./srcs/docker-compose.yml ls
+clean:
+	docker compose -f $(YML) down --rmi all -v
 
-logs:
-			docker-compose -f ./srcs/docker-compose.yml logs
+fclean:	clean
+	@-sudo rm -rf /home/jahuang/data/wordpress
+	@-sudo rm -rf /home/jahuang/data/mariadb
+
+.PHONY: all up down re clean fclean

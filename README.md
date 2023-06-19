@@ -1,22 +1,46 @@
-# Inception
+# inception
 
 Container + Container + Container  
 MariaDB + WP/PHP + Nginx
 
 ## Steps:
+1. setup VM
+	- install apps:  
+	curl, vim, git, ca-certificates, gnupg, lsb-release, make  
+	- install docker & docker-compose  
+	https://docs.docker.com/engine/install/ubuntu  
+	- create the folder structure  
 
-1. Create the mariadb Dockerfile.  
-	Learn about the [Dockerfile](#dockerfile) and [docker commands](#docker-commands)
-2. Docker compose  
-	Create the [docker-compose.yml](#The-YAML-file) file and test with some [docker compose commands](#docker-compose-commands) (with only mariadb container)
-3. Write a Makefile   
-	Put docker-compose commands inside. It's sort-of a cheat sheet. [Docker Compose Cheat Sheet](https://cheatography.com/gauravpandey44/cheat-sheets/docker-compose/)  
+2. Write Makefile
+It's like a cheat sheet of [docker-compose](#docker-compose) commands. [Docker Compose Cheat Sheet](https://cheatography.com/gauravpandey44/cheat-sheets/docker-compose/)  
 
-~~ Now we can sart a simple docker-compose app with the makefile.
+3. Writ docker-compose.yml
+[docker-compose](#docker-compose)
 
-4. 
+4. Create nginx -> mariadb -> wordpress
+[Dockerfiles](#dockerfile)
 
-## dockerfile
+5. `make`
+
+
+## docker-compose
+### the YAML file
+- build section in .yml file
+	https://docs.docker.com/compose/compose-file/build/
+	options:
+		- context
+		- args
+		- labels
+### docker compose commands
+	- `docker-compose -f [yml file] up -d --build`
+	[Docker Compose Cheat Sheet](https://cheatography.com/gauravpandey44/cheat-sheets/docker-compose/)
+	What we do in the makefile is more-or-less copy the conent of the cheat sheet into it.
+### about ".env"
+[Docker - environment variables](https://docs.docker.com/compose/environment-variables/)
+> You can set default values for environment variables using a .env file, which Compose automatically looks for in project directory (parent 
+Add key=value pairs in the ".env" file. And can be used as ${key} in the docker-compose.yml file.
+
+## Dockerfile
 
 1. `FROM` - Chose a base image
 ```
@@ -43,8 +67,6 @@ RUN apt update && apt upgrade -y && apt install -y install mariadb-server
 5. `EXPOSE` - expose the port
 
 6. `CMD` - the command to exec in the container
-
-## Docker
 
 ### docker commands
 
@@ -76,32 +98,6 @@ rm : remove an image or container
 
 `docker ps` : check running containers
 
-
-
-## docker-compose
-
-### the YAML file
-
-- build section in .yml file
-	https://docs.docker.com/compose/compose-file/build/
-	options:
-		- context
-		- args
-		- labels
-
-### docker compose commands
-	- `docker-compose -f [yml file] up -d --build`
-
-	[Docker Compose Cheat Sheet](https://cheatography.com/gauravpandey44/cheat-sheets/docker-compose/)
-	What we do in the makefile is more-or-less copy the conent of the cheat sheet into it.
-
-### about ".env"
-
-[Docker - environment variables](https://docs.docker.com/compose/environment-variables/)
-> You can set default values for environment variables using a .env file, which Compose automatically looks for in project directory (parent folder of your Compose file). Values set in the shell environment override those set in the .env file.
-
-Add key=value pairs in the ".env" file. And can be used as ${key} in the docker-compose.yml file.
-
 ## MySQL
 
 ### SQL queries
@@ -113,5 +109,21 @@ Add key=value pairs in the ".env" file. And can be used as ${key} in the docker-
 ## Nginx
 
 ## Wordpress
+
+## Issues
+- 403 forbiden
+- 502 bad gateway
+https://armno.medium.com/til-fixing-http-502-bad-gateway-error-nginx-wordpress-a591be919adf
+
+- How to Fix MySQL Error: Access Denied for User ‘root’@’localhost’
+
+- Error Establishing a Database(wordpress)
+https://www.dreamhost.com/blog/how-to-fix-wordpress-database-connection-error/
+
+# References:
+42 students' github repo with good README:
+- github.com/codesshaman/inception
+- github.com/twagger/inception
+- github.com/llescure/
 
 

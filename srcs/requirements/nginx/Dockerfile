@@ -1,20 +1,13 @@
-# The base system of the container
 FROM debian:buster
 
-# Running commands
-# Install nginx and openssl
-RUN apt-get update && \
-	apt-get -y install \
-		nginx \
-		openssl
+RUN apt-get update && apt-get install -y nginx openssl
 
-# Self sign a SSL certification
-RUN mkdir /etc/nginx/ssl \
-	&& openssl req -newkey rsa:2048 -new -nodes -x509 -days 3650 -keyout /etc/nginx/ssl/jahuang.key \
-    -out /etc/nginx/ssl/jahuang.csr -subj '/C=FR/ST=75/P=Paris/O=42/CN=jahuang'
+COPY ./conf/default /etc/nginx/sites-enabled/default
 
-COPY ./nginx.conf /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:4096 \
+	-keyout /etc/ssl/private/jahuang.key \
+	-out /etc/ssl/certs/jahuang.crt \
+	-subj "/C=FR/ST=75/L=Paris/O=42/CN=jahuang.42.fr";
 
 EXPOSE 443
 

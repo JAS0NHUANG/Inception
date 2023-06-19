@@ -1,47 +1,62 @@
-# the docker compose file version (not docker compose or docker version...)
-version: '3.8'
+version: "3.5"
 
-# Services
 services:
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    image: mariadb
+    env_file:
+      - .env
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - dnet
+    restart: always
 
-    # services' names can be anything :D
-    mariadb:
-        build:
-            context: ./requirements/mariadb
-        volumes:
-            - db_data:/var/lib/mysql
-        restart: always
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    image: wordpress
+    env_file:
+      - .env
+    depends_on:
+      - mariadb
+    volumes:
+      - wp_data:/var/www/site
+    networks:
+      - dnet
+    restart: always
 
-    nginx:
-        build:
-            context: ./requirements/nginx
-        ports:
-            - 4343:443
-        restart: always
-
-    wordpress:
-        build:
-            context: ./requirements/wordpress
-        ports:
-            - 9000:9000
-        depends_on:
-            - mariadb
-        restart: always
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    image: nginx
+    ports:
+      - "443:443"
+    depends_on:
+      - wordpress
+    volumes:
+      - wp_data:/var/www/site
+    networks:
+      - dnet
+    restart: always
 
 networks:
-    inception:
-        driver: bridge
+  dnet:
+    driver: bridge
 
 volumes:
-    db_data:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /goinfre/jahuang/data/db_data
-    wp_data:
-        driver: local
-        driver_opts:
-            type: none
-            o: bind
-            device: /goinfre/jahuang/data/wordpress
+  wp_data:
+    driver: local
+    name: wp_data
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jahuang/data/wordpress
+  db_data:
+    driver: local
+    name: db_data
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/jahuang/data/mariadb

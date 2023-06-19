@@ -1,29 +1,22 @@
-# The base system of the container
-FROM debian:buster
+FROM	debian:buster
 
-# Running commands
-RUN apt-get update && \
-	apt-get -y install \
-	php-fpm \
-	php-cgi \
-	php-common \
-	php-opcache \
-	php-mysqli \
-	# mysql vs mysqli (the "i" stands for "improved")
-	php-cli \
-	php-gd \
-	php-json \
-	php-dom \
-	php-mbstring \
-	php-xml \
-	php-zip \
-	wget \
-	openssl \
-	vim
+RUN	apt-get update && apt-get -y install php7.3 php-mysqli php-fpm curl
 
-RUN wget https://wordpress.org/wordpress-6.0.1.tar.gz \
-	&& tar -xzvf wordpress-6.0.1.tar.gz
+RUN	mkdir -p /var/www/site && mkdir -p /home/srcs
 
-EXPOSE 9000
+COPY	./conf/wp-config.php /var/www/site
 
-CMD ["php-fpm7.3", "-F"]
+COPY	./tools/wp_init.sh /home/srcs/
+
+RUN	cd /var/www/site ; \
+	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar ; \
+	chmod +x wp-cli.phar && mv wp-cli.phar /usr/local/bin/wp ; \
+	wp core download --allow-root ; 
+
+COPY	./conf/www.conf /etc/php/7.3/fpm/pool.d
+
+EXPOSE	9000
+
+ENTRYPOINT	[ "/home/srcs/wp_init.sh" ]
+
+CMD	["/usr/sbin/php-fpm7.3", "-F"]
